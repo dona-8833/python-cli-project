@@ -1,0 +1,9 @@
+{
+    "user_id": 402,
+    "name": "Ada Lovelace",
+    "roles": [
+        "admin",
+        "developer"
+    ],
+    "active": true
+}
