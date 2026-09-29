@@ -1,0 +1,20 @@
+[
+    {
+        "title": "moore",
+        "author": "azua",
+        "ISBN": 1,
+        "available": false
+    },
+    {
+        "title": "love",
+        "author": "sam",
+        "ISBN": 4,
+        "available": true
+    },
+    {
+        "title": "olive",
+        "author": "rock",
+        "ISBN": 2,
+        "available": true
+    }
+]
