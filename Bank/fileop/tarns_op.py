@@ -28,7 +28,7 @@ def write_transactions(transactiolns):
             "transaction_type":trans.transaction_type,
             "amount":trans.amount,
             "description":trans.description,
-            "date":trans.date.isoformar()
+            "date":trans.date.isoformat()
         })
     with open("database/transaction.json","w") as file:
         json.dump(data,file,indent=4)

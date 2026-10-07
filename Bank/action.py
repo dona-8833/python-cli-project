@@ -45,7 +45,7 @@ def auth():
             status, account_object = bank.fetch_account(prompt)
             if status:
                 while True:
-                    password = questionary.text("Enter your password").ask()
+                    password = questionary.password("Enter your password").ask()
                     if password is None:
                         print("Goodbye!")
                         exit()
@@ -59,6 +59,7 @@ def auth():
                 status ,res = bank.account_auth(account_object,password)
                 if status:
                     print(res)
+                    return True, account_object
                 else:
                     print(res)
             else:
@@ -80,7 +81,7 @@ def auth():
             if name.lower() == "q":
                 continue
             while True:
-                password = questionary.text("Enter your password (or q to quit:)").ask()
+                password = questionary.password("Enter your password (or q to quit:)").ask()
                 if password is None:
                     print("goodbye!")
                     exit()
@@ -99,11 +100,55 @@ def auth():
             if status:
                 write_accounts(bank.accounts)
                 print(res)
+                return True,user
             else:
                 print(res)
 
         elif choice == "Exit":
             print("Goodbye!")
+            return False,"Auth Failed"
+def bank_menu(details):
+    while True:
+        choice = questionary.select("Select an option", choices=["Deposit","Withdraw","Transfer","History","Exit"]).ask()
+        if choice == "Exit":
+            exit()
+        elif choice == "Deposit":
+            deposit(details)
+        else:
             break
 
-auth()
+        break
+
+def deposit(account):
+    description = questionary.text(
+        "Enter deposit description:"
+    ).ask()
+    if description is None:
+        return
+    while True:
+        amount = questionary.text(
+            "Enter amount:"
+        ).ask()
+        if amount is None:
+            return
+        try:
+            amount = float(amount)
+        except ValueError:
+            print("Amount must be a number")
+            continue
+        break
+    password = questionary.password(
+        "Enter your password:"
+    ).ask()
+    if password is None:
+        return
+    status, message = bank.deposit_account(
+        account,
+        description,
+        amount,
+        password
+    )
+    print(message)
+    if status:
+        write_accounts(bank.accounts)
+        write_transactions(bank.transactions)

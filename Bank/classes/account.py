@@ -10,3 +10,12 @@ class Account:
 
     def set_balance(self, balance):
         self.__bal = balance
+
+    def deposit(self, password, amount,transaction):
+        if self.acc_pass != password:
+            return False, "Wrong password"
+        if amount <= 0:
+            return False, "Amount must be greater than 0"
+        self.__bal += amount
+        self.acc_trans.append(transaction)
+        return True, "Deposit successful"
