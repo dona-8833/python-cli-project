@@ -63,7 +63,7 @@ def auth():
                 else:
                     print(res)
             else:
-                print(res)
+                print(account_object)
         elif choice == "SignUp":
             while True:
                 name = questionary.text("Enter your name (or q to quit):").ask()
@@ -111,9 +111,20 @@ def bank_menu(details):
     while True:
         choice = questionary.select("Select an option", choices=["Deposit","Withdraw","Transfer","History","Exit"]).ask()
         if choice == "Exit":
+            print("Goodbye!")
             exit()
         elif choice == "Deposit":
             deposit(details)
+            continue
+        elif choice == "Withdraw":
+            withdraw(details)
+            continue
+        elif choice == "Transfer":
+            transfer(details)
+            continue
+        elif choice == "History":
+            history(details)
+            continue
         else:
             break
 
@@ -121,15 +132,21 @@ def bank_menu(details):
 
 def deposit(account):
     description = questionary.text(
-        "Enter deposit description:"
+        "Enter deposit description(or q to quit):"
     ).ask()
     if description is None:
         return
+    if description.lower() == "q":
+        print("deposit cancelled")
+        return
     while True:
         amount = questionary.text(
-            "Enter amount:"
+            "Enter amount(or q to quit):"
         ).ask()
         if amount is None:
+            return
+        if amount.lower() == "q":
+            print("deposit cancelled")
             return
         try:
             amount = float(amount)
@@ -138,9 +155,12 @@ def deposit(account):
             continue
         break
     password = questionary.password(
-        "Enter your password:"
+        "Enter your password(or q to quit):"
     ).ask()
     if password is None:
+        return
+    if password == "q":
+        print("deposit cancelled")
         return
     status, message = bank.deposit_account(
         account,
@@ -152,3 +172,129 @@ def deposit(account):
     if status:
         write_accounts(bank.accounts)
         write_transactions(bank.transactions)
+
+def withdraw(account):
+    description = questionary.text(
+        "Enter deposit description(or q to quit):"
+    ).ask()
+    if description is None:
+        return
+    if description.lower() == "q":
+        print("deposit cancelled")
+        return
+    while True:
+        amount = questionary.text(
+            "Enter amount(or q to quit):"
+        ).ask()
+        if amount is None:
+            return
+        if amount.lower() == "q":
+            print("deposit cancelled")
+            return
+        try:
+            amount = float(amount)
+        except ValueError:
+            print("Amount must be a number")
+            continue
+        break
+    password = questionary.password(
+        "Enter your password(or q to quit):"
+    ).ask()
+    if password is None:
+        return
+    if password == "q":
+        print("deposit cancelled")
+        return
+    status, message = bank.withdraw_account(
+        account,
+        amount,
+        description,
+        password
+    )
+    print(message)
+    if status:
+        write_accounts(bank.accounts)
+        write_transactions(bank.transactions)
+
+def transfer(account):
+    while True:
+        to_account_number = questionary.text("Enter your account number (or q to quit)").ask()
+        if to_account_number is None:
+            print("Transfer cancelled")
+            return
+        if to_account_number.lower() == 'q':
+            print("Transefer cancelled")
+            return
+        try:
+            to_account_number = int(to_account_number)
+            break
+        except ValueError:
+            print("Enter a valid account number")
+            continue
+    if to_account_number == account.acc_num:
+        print("you cannot transfer to your account ")
+        return
+    status , to_account = bank.fetch_account(to_account_number)
+    print(f"you want to tansfer {to_account.acc_name}")
+    if not status:
+        print(to_account_number)
+        return
+    description = questionary.text(
+        "Enter deposit description(or q to quit):"
+    ).ask()
+    if description is None:
+        return
+    if description.lower() == "q":
+        print("deposit cancelled")
+        return
+    while True:
+        amount = questionary.text(
+            "Enter amount(or q to quit):"
+        ).ask()
+        if amount is None:
+            return
+        if amount.lower() == "q":
+            print("deposit cancelled")
+            return
+        try:
+            amount = float(amount)
+        except ValueError:
+            print("Amount must be a number")
+            continue
+        break
+    password = questionary.password(
+        "Enter your password(or q to quit):"
+    ).ask()
+    if password is None:
+        return
+    if password == "q":
+        print("deposit cancelled")
+        return
+    status,message = bank.transfer_account(account,to_account,amount,description,password)
+    print(message)
+    if status:
+        write_accounts(bank.accounts)
+        write_transactions(bank.transactions)
+
+def history(account):
+    status, history = bank.history_account(account)
+    if not status:
+        print(history)
+        return
+    print()
+    print(
+        f"{'ID':<8}"
+        f"{'TYPE':<12}"
+        f"{'AMOUNT':<12}"
+        f"{'DESCRIPTION':<25}"
+        f"{'DATE':<22}"
+    )
+    print("-" * 79)
+    for trans in history:
+        print(
+            f"{trans.transaction_id:<8}"
+            f"{trans.transaction_type:<12}"
+            f"{trans.amount:<12.2f}"
+            f"{trans.description:<25}"
+            f"{trans.date.strftime('%d-%m-%Y %H:%M:%S'):<22}"
+        )

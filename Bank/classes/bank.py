@@ -31,6 +31,39 @@ class Bank:
         if status:
             self.transactions.append(trans)
             return True,"Deposit successful"
-        return res
-
-    
+        return status, res
+    def withdraw_account(self,account,amount,decription,password):
+        trans_id = max((trans.transaction_id for trans in self.transactions),default=0) + 1
+        trans_type = "withdraw"
+        trans_amount = amount
+        trans_descri = decription
+        trans = Transaction(trans_id,trans_type,trans_amount,trans_descri)
+        status,res = account.withdraw(password,amount,trans)
+        if status:
+            self.transactions.append(trans)
+            return True,"Withdraw successful"
+        return status,res
+    def transfer_account(self,account,to_account,amount,decription,password):
+        trans_id = max((trans.transaction_id for trans in self.transactions),default=0) + 1
+        trans_type = "Transfer"
+        trans_amount = amount
+        trans_descri = f"{decription} to:{to_account.acc_num}"
+        trans = Transaction(trans_id,trans_type,trans_amount,trans_descri)
+        status,res = account.transfer(password,amount,trans)
+        if status:
+            self.transactions.append(trans)
+            trans_id = max((trans.transaction_id for trans in self.transactions),default=0) + 1
+            trans_type = "credit"
+            trans_amount = amount
+            trans_descri = f"{decription} from:{account.acc_num}"
+            credit_trans = Transaction(trans_id,trans_type,trans_amount,trans_descri)
+            to_account.set_credit(amount)
+            to_account.acc_trans.append(credit_trans)
+            self.transactions.append(credit_trans)
+            return True,"Transfer Successfull"
+        return status,res
+    def history_account(self,account):
+        history = [trans for trans in self.transactions if trans in account.acc_trans]
+        if not history:
+            return False,"No history from this account"
+        return True, history

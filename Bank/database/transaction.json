@@ -4,20 +4,104 @@
         "transaction_type": "deposit",
         "amount": 5000.0,
         "description": "to my account",
-        "date": "2026-10-07T17:44:07.945438"
+        "date": "07-10-2026 17:44:07"
     },
     {
         "transaction_id": 2,
         "transaction_type": "deposit",
         "amount": 4000.0,
         "description": "to my old account",
-        "date": "2026-10-07T17:45:51.690481"
+        "date": "07-10-2026 17:45:51"
     },
     {
         "transaction_id": 3,
         "transaction_type": "deposit",
         "amount": 1500.0,
         "description": "to my old account",
-        "date": "2026-10-07T17:46:29.025851"
+        "date": "07-10-2026 17:46:29"
+    },
+    {
+        "transaction_id": 4,
+        "transaction_type": "deposit",
+        "amount": 7000.0,
+        "description": "to my account",
+        "date": "08-10-2026 10:48:30"
+    },
+    {
+        "transaction_id": 5,
+        "transaction_type": "deposit",
+        "amount": 80000.0,
+        "description": "60000",
+        "date": "08-10-2026 10:49:18"
+    },
+    {
+        "transaction_id": 6,
+        "transaction_type": "deposit",
+        "amount": 12344.0,
+        "description": "hello",
+        "date": "08-10-2026 10:54:23"
+    },
+    {
+        "transaction_id": 7,
+        "transaction_type": "withdraw",
+        "amount": 844.0,
+        "description": "for school fee",
+        "date": "08-10-2026 11:18:29"
+    },
+    {
+        "transaction_id": 8,
+        "transaction_type": "deposit",
+        "amount": 60000.0,
+        "description": "skhsdjhjh",
+        "date": "08-10-2026 12:04:10"
+    },
+    {
+        "transaction_id": 9,
+        "transaction_type": "Transfer",
+        "amount": 6000.0,
+        "description": "to samad to:420542",
+        "date": "08-10-2026 12:38:31"
+    },
+    {
+        "transaction_id": 10,
+        "transaction_type": "credit",
+        "amount": 6000.0,
+        "description": "to samad from:615334",
+        "date": "08-10-2026 12:38:31"
+    },
+    {
+        "transaction_id": 11,
+        "transaction_type": "deposit",
+        "amount": 2000.0,
+        "description": "ksfjs",
+        "date": "08-10-2026 12:40:05"
+    },
+    {
+        "transaction_id": 12,
+        "transaction_type": "Transfer",
+        "amount": 4000.0,
+        "description": "dahdkjgdfj to:420542",
+        "date": "08-10-2026 12:40:38"
+    },
+    {
+        "transaction_id": 13,
+        "transaction_type": "credit",
+        "amount": 4000.0,
+        "description": "dahdkjgdfj from:420542",
+        "date": "08-10-2026 12:40:38"
+    },
+    {
+        "transaction_id": 14,
+        "transaction_type": "Transfer",
+        "amount": 50000.0,
+        "description": "to samad to:177217",
+        "date": "08-10-2026 12:49:42"
+    },
+    {
+        "transaction_id": 15,
+        "transaction_type": "credit",
+        "amount": 50000.0,
+        "description": "to samad from:615334",
+        "date": "08-10-2026 12:49:42"
     }
 ]

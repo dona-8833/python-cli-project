@@ -19,3 +19,26 @@ class Account:
         self.__bal += amount
         self.acc_trans.append(transaction)
         return True, "Deposit successful"
+
+    def withdraw(self, password, amount,transaction):
+        if self.acc_pass != password:
+            return False, "Wrong password"
+        if amount <= 0:
+            return False, "Amount must be greater than 0"
+        if amount > self.__bal:
+            return False, "insufficient balance"
+        self.__bal -= amount
+        self.acc_trans.append(transaction)
+        return True, "Withdraw successful"
+    def transfer(self,password,amount,transaction):
+        if self.acc_pass != password:
+            return False, "Wrong password"
+        if amount <= 0:
+            return False, "Amount must be greater than 0"
+        if amount > self.__bal:
+            return False, "insufficient balance"
+        self.__bal -= amount
+        self.acc_trans.append(transaction)
+        return True, "Transfer successful"
+    def set_credit(self,amount):
+        self.__bal+=amount

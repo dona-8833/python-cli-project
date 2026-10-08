@@ -13,7 +13,7 @@ def read_transactions():
                     transaction_details["transaction_type"],
                     transaction_details["amount"],
                     transaction_details["description"],
-                    datetime.fromisoformat(transaction_details["date"])
+                    datetime.strptime(transaction_details["date"],"%d-%m-%Y %H:%M:%S")
                 )
                 transactions.append(trans)
             return transactions
@@ -28,7 +28,7 @@ def write_transactions(transactiolns):
             "transaction_type":trans.transaction_type,
             "amount":trans.amount,
             "description":trans.description,
-            "date":trans.date.isoformat()
+            "date":trans.date.strftime("%d-%m-%Y %H:%M:%S")
         })
     with open("database/transaction.json","w") as file:
         json.dump(data,file,indent=4)
