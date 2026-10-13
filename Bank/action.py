@@ -235,10 +235,10 @@ def transfer(account):
         print("you cannot transfer to your account ")
         return
     status , to_account = bank.fetch_account(to_account_number)
-    print(f"you want to tansfer {to_account.acc_name}")
     if not status:
-        print(to_account_number)
+        print("Account number not found")
         return
+    print(f"you want to tansfer {to_account.acc_name}")
     description = questionary.text(
         "Enter deposit description(or q to quit):"
     ).ask()

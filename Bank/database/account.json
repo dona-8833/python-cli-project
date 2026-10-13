@@ -13,9 +13,10 @@
             7,
             8,
             9,
-            14
+            14,
+            16
         ],
-        "acc_bal": 111000.0
+        "acc_bal": 51000.0
     },
     {
         "acc_num": 420542,
@@ -70,8 +71,10 @@
         "acc_num": 551974,
         "acc_name": "basit",
         "acc_pass": "Isbanz",
-        "acc_trans": [],
-        "acc_bal": 0.0
+        "acc_trans": [
+            17
+        ],
+        "acc_bal": 60000.0
     },
     {
         "acc_num": 981204,
@@ -86,5 +89,25 @@
         "acc_pass": "123456",
         "acc_trans": [],
         "acc_bal": 0.0
+    },
+    {
+        "acc_num": 921475,
+        "acc_name": "sanusi",
+        "acc_pass": "12345",
+        "acc_trans": [
+            21
+        ],
+        "acc_bal": 20000.0
+    },
+    {
+        "acc_num": 576333,
+        "acc_name": "abdullahi",
+        "acc_pass": "Fourpass1558",
+        "acc_trans": [
+            18,
+            19,
+            20
+        ],
+        "acc_bal": 2180000.0
     }
 ]
